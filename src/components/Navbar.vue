@@ -5,4 +5,13 @@
     </div>
   </nav>
 </template>
-<style scoped></style>
+<style scoped>
+a {
+  color: white
+}
+.navbar {
+  background-color: #ffffff4d;
+  backdrop-filter: blur(10px);
+  padding: 20px;
+}
+</style>
