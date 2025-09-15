@@ -30,18 +30,23 @@ onMounted(() => {
 <style scoped>
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 colunas */
-  gap: 20px; /* espaçamento */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .card-wrapper {
-  height: 100%;          /* ocupa toda altura da célula */
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .card-wrapper > * {
-  flex: 1;               /* faz o Card ocupar 100% da altura disponível */
+  flex: 1;
+}
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
