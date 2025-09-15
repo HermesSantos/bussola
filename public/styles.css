@@ -1,3 +1,10 @@
 body{
   background-color: #212020;
+  padding-top: 70px;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 100px;
+  }
 }
