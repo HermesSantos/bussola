@@ -3,11 +3,11 @@ import Card from "./Card.vue";
 import { ref, onMounted } from 'vue'
 import apiService from '../services/apiService'
 
-const message = ref('Olá!')
+const products = ref(null)
 
 async function fetchProducts () {
-  const response = await apiService.get('/')
-  console.log(response.data)
+  const response = await apiService.get('/get-products')
+  products.value = response.data.products
 }
 onMounted(() => {
   fetchProducts()
@@ -15,6 +15,33 @@ onMounted(() => {
 </script>
 <template>
   <div class="container pt-5">
-    <Card />
+    <div class="cards-grid">
+      <div 
+        :key="`${product.id}_${product.name}`"
+        v-for="product in products"
+        class="card-wrapper"
+      >
+        <Card :product="product" />
+      </div>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+  gap: 20px; /* espaçamento */
+}
+
+.card-wrapper {
+  height: 100%;          /* ocupa toda altura da célula */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-wrapper > * {
+  flex: 1;               /* faz o Card ocupar 100% da altura disponível */
+}
+</style>

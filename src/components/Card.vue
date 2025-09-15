@@ -1,13 +1,18 @@
+<script setup>
+const props = defineProps({
+  product: String
+})
+</script>
 <template>
-  <div class="card image-effect">
-    <img src="https://drivers.pichau.com.br/pichaugaming/Banner/PC-PRS27-V2.png"
-      class="card-img-top card-img-top zoom-img"
-      alt="..."
+  <div class="card image-effect mt-3">
+    <img :src="product.image_url"
+      class="card-img-top card-img-top zoom-img full-card-img"
     >
-    <div class="overlay">
-      <span class="overlay-text">Texto do Hover</span>
+    <div class="overlay p-2">
+      <span class="overlay-text">{{product.description}}</span>
     </div>
   </div>
+  <div class="description">{{product.description}}</div>
 </template>
 <style scoped>
 .card-body{
@@ -15,6 +20,13 @@
 }
 .zoom-img {
   transition: transform 0.3s ease;
+}
+
+.full-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .zoom-img:hover {
@@ -49,5 +61,10 @@
   font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
+}
+.description {
+  margin-top: 1%;
+  color: white;
+  max-width: 40%;
 }
 </style>
