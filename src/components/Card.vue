@@ -4,14 +4,15 @@ const props = defineProps({
 })
 </script>
 <template>
-  <div class="card image-effect mt-3">
+  <router-link :to="/product/ + product.id" class="card image-effect mt-3">
     <img :src="product.image_url"
       class="card-img-top card-img-top zoom-img full-card-img"
     >
-    <div class="overlay p-2">
+    <div class="overlay p-2 flex flex-column">
       <span class="overlay-text">{{product.description}}</span>
+      <span class="overlay-text mt-3">R$ {{product.price}}</span>
     </div>
-  </div>
+  </router-link>
   <div class="description">{{product.description}}</div>
 </template>
 <style scoped>
