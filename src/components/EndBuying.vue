@@ -85,6 +85,12 @@ async function fetchProducts () {
   total.value = response.data
 }
 
+function handleBuying () {
+  localStorage.removeItem('cart')
+  localStorage.removeItem('totalCartItems')
+  cartStore.clearCart
+}
+
 const cartStore = useCartStore();
 const allItems = ref()
 
