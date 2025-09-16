@@ -26,8 +26,14 @@
             <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
           </button>
 
+          <button class="btn btn-dark btn-lg w-100 mb-3 position-relative" @click="removeFromCart(product)"
+            :class="{'disabled-link': itemsAll.length > 0}"
+          >
+            <i class="bi bi-cart-fill me-2"></i> Remover do Carrinho
+          </button>
+
           <a
-            class="btn btn-dark btn-lg w-100 mb-3 position-relative"
+            class="btn btn-success btn-lg w-100 mb-3 position-relative"
             href="/cart"
           >
             <i class="bi bi-cart-fill me-2"></i> Ir Para o Carrinho
@@ -63,6 +69,31 @@ onMounted(async () => {
   product.value = response.data
 })
 
+function removeFromCart(product: any) {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  const existingProductIndex = cart.findIndex((item: any) => item.nome === product.name);
+
+  if (existingProductIndex !== -1) {
+    if (cart[existingProductIndex].quantidade > 1) {
+      cart[existingProductIndex].quantidade -= 1;
+    } else {
+      cart.splice(existingProductIndex, 1);
+    }
+  }
+
+  let totalCartItems = cart.reduce(
+    (acc: number, item: any) => acc + item.quantidade,
+    0
+  );
+
+  cartStore.items = totalCartItems;
+  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("totalCartItems", JSON.stringify(totalCartItems));
+
+  showAlert("Item removido do carrinho!");
+}
+
 function addToCart (product: any) {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
@@ -83,9 +114,10 @@ function addToCart (product: any) {
   cartStore.items++
   localStorage.setItem("cart", JSON.stringify(cart));
   localStorage.setItem("totalCartItems", JSON.stringify(totalCartItems));
-  showAlert()
+  showAlert("Item adicionado ao carrinho!");
 }
-function showAlert () {
+
+function showAlert (message: string, type = "success" ) {
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -98,8 +130,8 @@ function showAlert () {
     }
   });
   Toast.fire({
-    icon: "success",
-    title: "Adicionado ao Carrinho com Sucesso!"
+    icon: type,
+    title: message
   });
 }
 </script>
