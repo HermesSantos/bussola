@@ -43,6 +43,9 @@
 import { ref, onMounted } from "vue"
 import { useRoute } from "vue-router"
 import apiService from "@/services/apiService"
+import { useCartStore } from "../stores/cartStore"
+
+const cartStore = useCartStore();
 
 const route = useRoute()
 const product = ref<any>(null)
@@ -52,9 +55,7 @@ onMounted(async () => {
   product.value = response.data
 })
 
-const numberOfCartItems = ref()
-
-function addToCart(product: any) {
+function addToCart (product: any) {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
   const existingProduct = cart.find((item: any) => item.nome === product.name);
@@ -69,7 +70,7 @@ function addToCart(product: any) {
     });
   }
   let totalCartItems = cart.reduce((acc: number, item: any) => acc + item.quantidade, 0);
-  numberOfCartItems.value = totalCartItems
+  cartStore.items++
   localStorage.setItem("cart", JSON.stringify(cart));
   localStorage.setItem("totalCartItems", JSON.stringify(totalCartItems));
 }
