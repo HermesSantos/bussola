@@ -1,7 +1,6 @@
 <template>
   <div class="container my-5" v-if="product">
-    <div class="row main-card">
-      <!-- Coluna da Imagem -->
+    <div class="row main-card p-5">
       <div class="col-md-6 text-center">
         <img 
           :src="product.image_url" 
@@ -11,41 +10,21 @@
         />
       </div>
 
-      <!-- Coluna das Informações -->
-      <div class="col-md-6">
-        <h2 class="mb-4">{{ product.name }}</h2>
+      <div class="d-flex flex-column justify-content-between col-md-6">
+        <h1 class="mb-4">{{ product.name }}</h1>
+        <h2 class="mb-4">Valor: R$ {{ product.price }}</h2>
 
-        <!-- Botão principal -->
-        <button class="btn btn-danger btn-lg w-100 mb-3">
-          <i class="bi bi-cart-fill me-2"></i> COMPRAR PRODUTO
-        </button>
-
-        <!-- Botões secundários -->
-        <div class="d-flex gap-2 mb-4">
-          <button class="btn btn-outline-danger flex-fill">
-            <i class="bi bi-play-circle me-2"></i> ASSISTA
-          </button>
-          <button class="btn btn-outline-danger flex-fill">
-            <i class="bi bi-file-earmark-text me-2"></i> MANUAL
-          </button>
-          <button class="btn btn-outline-danger flex-fill">
-            <i class="bi bi-download me-2"></i> DRIVERS
-          </button>
-        </div>
-
-        <!-- Caixa de informações -->
-        <div class="border rounded p-3">
-          <div class="row">
-            <div class="col-6">
-              <h6 class="fw-bold">O que vem na caixa</h6>
-              <p class="mb-0">Mouse | Manual</p>
-            </div>
-            <div class="col-6">
-              <h6 class="fw-bold">Informações adicionais</h6>
-              <p class="mb-0">---</p>
-            </div>
+        <div>
+          <div class="w-100 mb-3">
+            <h2>Descrição: </h2>
+            <span>Descrição: {{ product.description }}</span>
           </div>
+
+        <button class="btn btn-danger btn-lg w-100 mb-3">
+          <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
+        </button>
         </div>
+
       </div>
     </div>
   </div>
