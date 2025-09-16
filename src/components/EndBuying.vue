@@ -23,18 +23,18 @@
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="payment" id="card" value="card" v-model="paymentMethod">
-          <label class="form-check-label" for="card">
+          <input class="form-check-input" type="radio" name="payment" id="cartao_credito" value="cartao_credito" v-model="paymentMethod">
+          <label class="form-check-label" for="cartao_credito">
             <b>Cartão de Crédito</b>
           </label>
         </div>
       </div>
 
-      <div v-if="paymentMethod === 'card'" class="mb-4">
+      <div v-if="paymentMethod === 'cartao_credito'" class="mb-4">
         <h5 for="installments" class="form-label">Parcelamento</h5>
         <br><small class="mt-3 mb-3 text-danger" v-if="installments > 1">1% de juros ao mês a partir da segunda parcela</small>
-        <select id="installments" class="form-select" v-model="installments">
-          <option v-for="n in 12" :key="n" :value="n">
+        <select id="installments" class="form-select" v-model="installments" @change="fetchProducts()">
+          <option v-for="n in 12" :key="n" :value="n" >
             {{ n }}x
           </option>
         </select>
