@@ -21,7 +21,7 @@
           </div>
 
           <button class="btn btn-danger btn-lg w-100 mb-3 position-relative" @click="addToCart(product)"
-            :class="{'disabled-link': true}"
+            :class="{'disabled-link': itemsAll.length > 0}"
           >
             <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
           </button>
@@ -55,6 +55,8 @@ const cartStore = useCartStore();
 
 const route = useRoute()
 const product = ref<any>(null)
+
+const itemsAll = cartStore.items
 
 onMounted(async () => {
   const response = await apiService.get(`/get-product/${route.params.id}`)
