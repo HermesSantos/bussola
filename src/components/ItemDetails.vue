@@ -13,7 +13,6 @@
       <div class="d-flex flex-column justify-content-between col-md-6">
         <h1>{{ product.name }}</h1>
         <h2>Valor: R$ {{ product.price }}</h2>
-        <h2 v-if="itemsAll > 0" class="mb-4">Quantidade: {{ itemsAll }}</h2>
 
         <div>
           <div class="w-100 mb-3">
