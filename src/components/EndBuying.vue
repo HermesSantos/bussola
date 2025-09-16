@@ -31,8 +31,8 @@
       </div>
 
       <div v-if="paymentMethod === 'card'" class="mb-4">
-        <label for="installments" class="form-label">Parcelamento</label>
-        <br><small class="mt-3 mb-3 text-danger">1% de juros ao mês a partir da segunda parcela</small>
+        <h5 for="installments" class="form-label">Parcelamento</h5>
+        <br><small class="mt-3 mb-3 text-danger" v-if="installments > 1">1% de juros ao mês a partir da segunda parcela</small>
         <select id="installments" class="form-select" v-model="installments">
           <option v-for="n in 12" :key="n" :value="n">
             {{ n }}x
@@ -40,13 +40,18 @@
         </select>
       </div>
 
-      <div class="mb-4 d-flex justify-content-between">
+      <div class="mb-4 d-flex justify-content-between" v-if="total">
         <h2>
-          <strong>Total:</strong>
+          <strong>Total: {{formatCurrency(total.valor_total)}}</strong>
         </h2>
+          <b><small v-if="paymentMethod === 'pix' || installments === 1" class="text-success">10% de Desconto!</small></b>
       </div>
 
-      <button class="btn btn-danger w-100">Finalizar Compra</button>
+      <button class="btn btn-danger">
+        <h4>
+          Finalizar Compra
+        </h4>
+      </button>
     </div>
   </div>
 </template>
@@ -54,11 +59,30 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useCartStore } from "../stores/cartStore"
+import apiService from '../services/apiService'
 
 onMounted(async () => {
   allItems.value = cartStore.itemsToBuy
-  console.log("klkjljk", allItems.value)
+  fetchProducts()
 })
+
+const total = ref()
+
+const formatCurrency = (total: number) => {
+  return new Intl
+    .NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
+    .format(total)
+}
+
+async function fetchProducts () {
+  let data = {
+    produtos: allItems.value,
+    metodo_pagamento: (paymentMethod.value).toUpperCase(),
+    parcelas: installments.value
+  }
+  const response = await apiService.post('/calculate-cart-taxes', data)
+  total.value = response.data
+}
 
 const cartStore = useCartStore();
 const allItems = ref()
