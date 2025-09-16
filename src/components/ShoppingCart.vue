@@ -20,9 +20,9 @@
             <span>Descrição: {{ product.description }}</span>
           </div>
 
-        <button class="btn btn-danger btn-lg w-100 mb-3" @click="addToCart(product)">
-          <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
-        </button>
+          <button class="btn btn-danger btn-lg w-100 mb-3 position-relative" @click="addToCart(product)">
+            <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
+          </button>
         </div>
 
       </div>
@@ -48,6 +48,8 @@ onMounted(async () => {
   product.value = response.data
 })
 
+const numberOfCartItems = ref()
+
 function addToCart(product: any) {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
@@ -62,7 +64,10 @@ function addToCart(product: any) {
       quantidade: 1,
     });
   }
+  let totalCartItems = cart.reduce((acc: number, item: any) => acc + item.quantidade, 0);
+  numberOfCartItems.value = totalCartItems
   localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("totalCartItems", JSON.stringify(totalCartItems));
 }
 </script>
 <style scoped>

@@ -19,10 +19,15 @@
 import { ref, onMounted } from "vue"
 
 const numberOfCartItems = ref(0)
+type CartItem = {
+  quantidade: string
+}
 
 onMounted(async () => {
   let cart = JSON.parse(localStorage.getItem('cart'))
-  numberOfCartItems.value = cart.length
+  cart.map((cartItem: CartItem) => {
+    numberOfCartItems.value += cartItem.quantidade
+  })
 })
 </script>
 <style scoped>
