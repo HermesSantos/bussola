@@ -69,6 +69,8 @@ function addToCart (product: any) {
     cart.push({
       nome: product.name,
       valor: product.price,
+      image_url: product.image_url,
+      descricao: product.description,
       quantidade: 1,
     });
   }
