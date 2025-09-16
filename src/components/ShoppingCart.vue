@@ -23,6 +23,10 @@
           <button class="btn btn-danger btn-lg w-100 mb-3 position-relative" @click="addToCart(product)">
             <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
           </button>
+
+          <button class="btn btn-dark btn-lg w-100 mb-3 position-relative" @click="addToCart(product)">
+            <i class="bi bi-cart-fill me-2"></i> Ir Para o Carrinho
+          </button>
         </div>
 
       </div>
