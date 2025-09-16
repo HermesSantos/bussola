@@ -20,7 +20,9 @@
             <span>Descrição: {{ product.description }}</span>
           </div>
 
-          <button class="btn btn-danger btn-lg w-100 mb-3 position-relative" @click="addToCart(product)">
+          <button class="btn btn-danger btn-lg w-100 mb-3 position-relative" @click="addToCart(product)"
+            :class="{'disabled-link': true}"
+          >
             <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
           </button>
 
@@ -103,5 +105,10 @@ function showAlert () {
 .main-card {
   background-color: white;
   border-radius: 5px;
+}
+.disabled-link {
+  pointer-events: none;
+  text-decoration: none;
+  cursor: not-allowed;
 }
 </style>

@@ -15,6 +15,9 @@ onMounted(() => {
 </script>
 <template>
   <div class="container pt-5">
+    <div class="text-white mt-5 mb-5">
+      <h1>Produtos</h1>
+    </div>
     <div class="cards-grid">
       <div 
         :key="`${product.id}_${product.name}`"

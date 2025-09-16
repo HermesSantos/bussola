@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg bg-body-light fixed-top">
     <div class="container d-flex align-items-center">
       <router-link to="/" class="navbar-brand d-flex align-items-center" href="/">
-        <span class="hover-effect">House of Wolves</span>
+        <h3 class="hover-effect text-white">House of Wolves</h3>
       </router-link>
       <a href="/cart" style="color: black;" class="position-relative">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="24" height="24" fill="white">
@@ -35,9 +35,6 @@ onMounted(async () => {
 })
 </script>
 <style scoped>
-span {
-  color: white
-}
 .navbar {
   background-color: #ffffff4d;
   backdrop-filter: blur(10px);
