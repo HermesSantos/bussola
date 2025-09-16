@@ -1,6 +1,6 @@
 <template>
   <div class="container my-5">
-    <div class="card p-4">
+    <div class="card p-4" v-if="allItems">
       <h2 class="mb-4">Finalizar Compra</h2>
 
       <div class="mb-4">
@@ -47,11 +47,11 @@
           <b><small v-if="paymentMethod === 'pix' || installments === 1" class="text-success">10% de Desconto!</small></b>
       </div>
 
-      <button class="btn btn-danger">
+      <a href="/" @click="handleBuying" class="btn btn-danger">
         <h4>
           Finalizar Compra
         </h4>
-      </button>
+      </a>
     </div>
   </div>
 </template>
@@ -60,6 +60,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useCartStore } from "../stores/cartStore"
 import apiService from '../services/apiService'
+import Swal from 'sweetalert2'
 
 onMounted(async () => {
   allItems.value = cartStore.itemsToBuy

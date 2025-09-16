@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar.vue";
 
 <template>
   <Navbar />
-  <router-view/>
+  <router-view :key="$route.fullPath"/>
 </template>
 
 <style scoped></style>

@@ -24,12 +24,12 @@
             <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
           </button>
 
-          <router-link
+          <a
             class="btn btn-dark btn-lg w-100 mb-3 position-relative"
-            to="/cart"
+            href="/cart"
           >
             <i class="bi bi-cart-fill me-2"></i> Ir Para o Carrinho
-          </router-link>
+          </a>
         </div>
 
       </div>
@@ -47,6 +47,7 @@ import { ref, onMounted } from "vue"
 import { useRoute } from "vue-router"
 import apiService from "@/services/apiService"
 import { useCartStore } from "../stores/cartStore"
+import Swal from 'sweetalert2'
 
 const cartStore = useCartStore();
 
@@ -78,6 +79,24 @@ function addToCart (product: any) {
   cartStore.items++
   localStorage.setItem("cart", JSON.stringify(cart));
   localStorage.setItem("totalCartItems", JSON.stringify(totalCartItems));
+  showAlert()
+}
+function showAlert () {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+  Toast.fire({
+    icon: "success",
+    title: "Adicionado ao Carrinho com Sucesso!"
+  });
 }
 </script>
 <style scoped>

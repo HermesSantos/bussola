@@ -1,5 +1,8 @@
 <template>
   <div v-if="itemsToBuy" class="container">
+    <div class="text-white mt-5">
+      <h1>Confirmação de Itens</h1>
+    </div>
     <div class=" my-5 bg-white rounded" v-for="product in itemsToBuy" :key="product.id">
       <div class="row main-card p-5">
         <div class="col-md-6 text-center">
@@ -42,7 +45,7 @@ import { ref, onMounted } from "vue"
 import { useCartStore } from "../stores/cartStore"
 
 const cartStore = useCartStore();
-const itemsToBuy = ref()
+const itemsToBuy = ref(null)
 
 onMounted(async () => {
   itemsToBuy.value = cartStore.allItems

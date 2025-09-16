@@ -2,8 +2,8 @@ import { defineStore } from "pinia";
 
 export const useCartStore = defineStore("cart", {
   state: () => ({
-    items: JSON.parse(localStorage.getItem("totalCartItems")) as any[],
-    itemsToBuy: JSON.parse(localStorage.getItem("cart")) as any[]
+    items: JSON.parse(localStorage.getItem("totalCartItems")) || [],
+    itemsToBuy: JSON.parse(localStorage.getItem("cart")) || []
   }),
 
   getters: {
@@ -11,4 +11,12 @@ export const useCartStore = defineStore("cart", {
       return state.itemsToBuy
     },
   },
+  actions: {
+    clearCart() {
+      this.items = []
+      this.itemsToBuy = []
+      localStorage.removeItem("totalCartItems")
+      localStorage.removeItem("cart")
+    }
+  }
 });
