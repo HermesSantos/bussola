@@ -47,11 +47,11 @@
           <b><small v-if="paymentMethod === 'pix' || installments === 1" class="text-success">10% de Desconto!</small></b>
       </div>
 
-      <a href="/" @click="handleBuying" class="btn btn-danger">
+      <button @click="showAlert" class="btn btn-danger">
         <h4>
           Finalizar Compra
         </h4>
-      </a>
+      </button>
     </div>
   </div>
 </template>
@@ -61,6 +61,9 @@ import { ref, computed, onMounted } from 'vue'
 import { useCartStore } from "../stores/cartStore"
 import apiService from '../services/apiService'
 import Swal from 'sweetalert2'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 onMounted(async () => {
   allItems.value = cartStore.itemsToBuy
@@ -83,6 +86,24 @@ async function fetchProducts () {
   }
   const response = await apiService.post('/calculate-cart-taxes', data)
   total.value = response.data
+}
+
+function showAlert () {
+  Swal.fire({
+    icon:"question",
+    title: "Deseja finalizar a compra?",
+    showDenyButton: true,
+    showCancelButton: false,
+    confirmButtonText: "Sim",
+    denyButtonText: "Não"
+  }).then((result) => {
+      if (result.isConfirmed) {
+        handleBuying()
+        setTimeout(() => {
+          window.location.href = '/'
+        }, 2000)
+      } 
+    });
 }
 
 function handleBuying () {
