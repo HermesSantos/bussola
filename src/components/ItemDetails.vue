@@ -11,8 +11,9 @@
       </div>
 
       <div class="d-flex flex-column justify-content-between col-md-6">
-        <h1 class="mb-4">{{ product.name }}</h1>
-        <h2 class="mb-4">Valor: R$ {{ product.price }}</h2>
+        <h1>{{ product.name }}</h1>
+        <h2>Valor: R$ {{ product.price }}</h2>
+        <h2 v-if="itemsAll > 0" class="mb-4">Quantidade: {{ itemsAll }}</h2>
 
         <div>
           <div class="w-100 mb-3">
@@ -20,26 +21,27 @@
             <span>Descrição: {{ product.description }}</span>
           </div>
 
-          <button class="btn btn-danger btn-lg w-100 mb-3 position-relative" @click="addToCart(product)"
+          <button class="btn btn-success btn-lg w-100 mb-3 position-relative" @click="addToCart(product)"
             :class="{'disabled-link': itemsAll.length > 0}"
           >
             <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
           </button>
 
-          <button class="btn btn-dark btn-lg w-100 mb-3 position-relative" @click="removeFromCart(product)"
+          <button class="btn btn-danger btn-lg w-100 mb-3 position-relative" @click="removeFromCart(product)"
             :class="{'disabled-link': itemsAll.length > 0}"
           >
             <i class="bi bi-cart-fill me-2"></i> Remover do Carrinho
           </button>
 
-          <a
-            class="btn btn-success btn-lg w-100 mb-3 position-relative"
-            href="/cart"
-          >
-            <i class="bi bi-cart-fill me-2"></i> Ir Para o Carrinho
-          </a>
         </div>
-
+      </div>
+      <div class="mt-5">
+        <a
+          class="btn btn-dark btn-lg w-100 mb-3 position-relative"
+          href="/cart"
+        >
+          <i class="bi bi-cart-fill me-2"></i> Ir Para o Carrinho
+        </a>
       </div>
     </div>
   </div>

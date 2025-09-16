@@ -99,9 +99,7 @@ function showAlert () {
   }).then((result) => {
       if (result.isConfirmed) {
         handleBuying()
-        setTimeout(() => {
-          window.location.href = '/'
-        }, 2000)
+        window.location.href = '/'
       } 
     });
 }
