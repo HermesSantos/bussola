@@ -20,7 +20,7 @@
             <span>Descrição: {{ product.description }}</span>
           </div>
 
-        <button class="btn btn-danger btn-lg w-100 mb-3">
+        <button class="btn btn-danger btn-lg w-100 mb-3" @click="addToCart(product)">
           <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
         </button>
         </div>
@@ -47,6 +47,23 @@ onMounted(async () => {
   const response = await apiService.get(`/get-product/${route.params.id}`)
   product.value = response.data
 })
+
+function addToCart(product: any) {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  const existingProduct = cart.find((item: any) => item.nome === product.name);
+
+  if (existingProduct) {
+    existingProduct.quantidade += 1;
+  } else {
+    cart.push({
+      nome: product.name,
+      valor: product.price,
+      quantidade: 1,
+    });
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 </script>
 <style scoped>
 .main-card {
