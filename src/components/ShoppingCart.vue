@@ -66,13 +66,13 @@ onMounted(() => {
 })
 
 function removeItem(nome: string) {
-  const product = itemsToBuy.value.find((item) => item.nome === nome)
+  const product = itemsToBuy.value.find((item: {nome: string}) => item.nome === nome)
 
   if (product) {
     if (product.quantidade > 1) {
       product.quantidade -= 1
     } else {
-      itemsToBuy.value = itemsToBuy.value.filter((item) => item.nome !== nome)
+      itemsToBuy.value = itemsToBuy.value.filter((item: {nome: string}) => item.nome !== nome)
     }
   }
 

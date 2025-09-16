@@ -125,7 +125,7 @@ function showAlert (message: string, type = "success" ) {
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
-    didOpen: (toast) => {
+    didOpen: (toast: {onmouseenter: string, onmouseleave: string}) => {
       toast.onmouseenter = Swal.stopTimer;
       toast.onmouseleave = Swal.resumeTimer;
     }
