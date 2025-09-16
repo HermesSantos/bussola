@@ -24,9 +24,12 @@
             <i class="bi bi-cart-fill me-2"></i> Adicionar ao Carrinho
           </button>
 
-          <button class="btn btn-dark btn-lg w-100 mb-3 position-relative" @click="addToCart(product)">
+          <router-link
+            class="btn btn-dark btn-lg w-100 mb-3 position-relative"
+            to="/cart"
+          >
             <i class="bi bi-cart-fill me-2"></i> Ir Para o Carrinho
-          </button>
+          </router-link>
         </div>
 
       </div>
