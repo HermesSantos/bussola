@@ -59,7 +59,7 @@ import { ref, onMounted } from "vue"
 import { useCartStore } from "../stores/cartStore"
 
 const cartStore = useCartStore()
-const itemsToBuy = ref<any[]>([])
+const itemsToBuy = ref<Product[]>([])
 
 onMounted(() => {
   itemsToBuy.value = [...cartStore.allItems]
