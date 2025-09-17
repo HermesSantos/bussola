@@ -59,10 +59,8 @@ import { useCartStore } from "../stores/cartStore"
 import Swal from 'sweetalert2'
 
 const cartStore = useCartStore();
-
 const route = useRoute()
 const product = ref<any>(null)
-
 const itemsAll = cartStore.items
 
 onMounted(async () => {
@@ -115,22 +113,17 @@ function addToCart (product: any) {
   cartStore.items++
   localStorage.setItem("cart", JSON.stringify(cart));
   localStorage.setItem("totalCartItems", JSON.stringify(totalCartItems));
+  
   showAlert("Item adicionado ao carrinho!");
 }
 
-function showAlert (message: string, type = "success" ) {
-  const Toast = Swal.mixin({
+function showAlert (message: string, type: SweetAlertIconType = "success") {
+  Swal.fire({
     toast: true,
     position: "top-end",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
-    didOpen: (toast: {onmouseenter: string, onmouseleave: string}) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    }
-  });
-  Toast.fire({
     icon: type,
     title: message
   });

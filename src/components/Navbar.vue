@@ -27,11 +27,17 @@ type CartItem = {
   quantidade: string
 }
 onMounted(async () => {
-  let cart = JSON.parse(localStorage.getItem('cart'))
-  if(cart.length === 0) return
-  cart.map((cartItem: CartItem) => {
-    numberOfCartItems.value += cartItem.quantidade
-  })
+  const cartData = localStorage.getItem('cart')
+  const cart = cartData ? JSON.parse(cartData) : []
+
+  if(cart?.length === 0) return
+  
+  if(cart.length > 0){
+    cart.map((cartItem: CartItem) => {
+      numberOfCartItems.value += Number(cartItem.quantidade)
+    })
+
+  }
 })
 </script>
 <style scoped>

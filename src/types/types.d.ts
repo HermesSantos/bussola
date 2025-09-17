@@ -1,0 +1,1 @@
+type SweetAlertIconType = 'success' | 'error' | 'warning' | 'info' | 'question';

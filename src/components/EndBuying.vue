@@ -61,9 +61,11 @@ import { ref, computed, onMounted } from 'vue'
 import { useCartStore } from "../stores/cartStore"
 import apiService from '../services/apiService'
 import Swal from 'sweetalert2'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
+const cartStore = useCartStore();
+const allItems = ref()
+const paymentMethod = ref('pix')
+const installments = ref(1)
 
 onMounted(async () => {
   allItems.value = cartStore.itemsToBuy
@@ -109,12 +111,6 @@ function handleBuying () {
   localStorage.removeItem('totalCartItems')
   cartStore.clearCart
 }
-
-const cartStore = useCartStore();
-const allItems = ref()
-
-const paymentMethod = ref('pix')
-const installments = ref(1)
 
 </script>
 
